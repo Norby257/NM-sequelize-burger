@@ -7,34 +7,21 @@ var db = require("../models/")
 // get route -> index
 //  we use router and they can be tied to any app
 //  do not need access to any app
-//  router is an express object
-//  db.methods we are using are db.findAll db.update, db.createOne? idk
+//  router is an express object makes loose coupling
 router.get("/", function(req, res) {
   res.redirect("/burgers")
-  //  I need to select the correct thing here and not the operation data 
-  // db.Burger.selectAll(function(data){
-  //   var hbsObject = {
-  //     burgers: data
-  //   }
-  //   console.log(hbsObject);
-  //   res.render("index", hbsObject);
-  // })
-    // db.Burger.selectAll(function(data){
-    //   res.render("index", {burgers: data})
-    // });
-})
 
-router.get("/burgers", function(req, res) {
-  // express callback response by calling burger.selectAllBurger
-  db.Burger.findAll({}).then(function(dbBurger) {
-    res.json(dbBurger)
+  db.Burger.findAll({}).then(function(data) {
+    var hbsObject = { burgers: data }
+    res.render("index", hbsObject)
   })
 })
 
 
-router.post("burger/create", function(req, res) {
+
+router.post("burgers/create", function(req, res) {
   db.Burger.create({
-    burger_name: req.body.burger_name
+    "burger_name": req.body.burger_name
   }).then(function(result) {
     console.log(result)
     res.redirect("/")
@@ -60,6 +47,6 @@ router.put("/burgers/update/:id", function(req, res) {
     res.json("/")
   })
 })
-console.log("burger controller!");
+console.log("burger controller!")
 
 module.exports = router
