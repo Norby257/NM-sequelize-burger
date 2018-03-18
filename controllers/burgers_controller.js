@@ -25,14 +25,14 @@ router.get("/burgers", function(req, res){
 });
 
 
-router.post("burgers/create", function(req, res) {
+router.post("/burgers/create", function(req,res){
   db.Burger.create({
     "burger_name": req.body.burger_name
-  }).then(function(result) {
-    console.log(result)
-    res.redirect("/")
-  })
-})
+  }).then(function(result){
+    console.log(result);
+    res.redirect("/");
+  });
+});
 
 // put route -> back to index
 router.put("/burgers/update/:id", function(req, res) {
