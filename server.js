@@ -1,19 +1,21 @@
+//  node dependencies 
 var express = require("express")
 var bodyParser = require("body-parser")
 var path = require("path")
 
 var app = express()
 // Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static(path.join(__dirname, "/public")))
+app.use(express.static(path.join(__dirname, "public")))
 // app.use(express.static("public"));
 var db = require("./models")
 
 // parse application/x-www-form-urlencoded
 app.use(
   bodyParser.urlencoded({
-    extended: false
+    extended: true 
   })
 )
+app.use(bodyParser.json());
 
 //  set handlebars
 var exphbs = require("express-handlebars")
@@ -24,6 +26,8 @@ app.engine(
     defaultLayout: "main"
   })
 )
+
+
 app.set("view engine", "handlebars")
 
 var routes = require("./controllers/burgers_controller")
