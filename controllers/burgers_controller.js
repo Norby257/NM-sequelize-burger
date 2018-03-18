@@ -11,6 +11,17 @@ var db = require("../models/")
 //  db.methods we are using are db.findAll db.update, db.createOne? idk
 router.get("/", function(req, res) {
   res.redirect("/burgers")
+  //  I need to select the correct thing here and not the operation data 
+  // db.Burger.selectAll(function(data){
+  //   var hbsObject = {
+  //     burgers: data
+  //   }
+  //   console.log(hbsObject);
+  //   res.render("index", hbsObject);
+  // })
+    // db.Burger.selectAll(function(data){
+    //   res.render("index", {burgers: data})
+    // });
 })
 
 router.get("/burgers", function(req, res) {
@@ -19,7 +30,6 @@ router.get("/burgers", function(req, res) {
     res.json(dbBurger)
   })
 })
-
 
 
 router.post("burger/create", function(req, res) {
@@ -50,5 +60,6 @@ router.put("/burgers/update/:id", function(req, res) {
     res.json("/")
   })
 })
+console.log("burger controller!");
 
 module.exports = router

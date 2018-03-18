@@ -4,8 +4,8 @@ var path = require("path")
 
 var app = express()
 // Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static(path.join(__dirname, "public")))
-
+app.use(express.static(path.join(__dirname, "/public")))
+// app.use(express.static("public"));
 var db = require("./models")
 
 // parse application/x-www-form-urlencoded
