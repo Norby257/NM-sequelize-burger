@@ -1,0 +1,1 @@
+# NM-sequelize-burger
