@@ -9,14 +9,20 @@ var db = require("../models/")
 //  do not need access to any app
 //  router is an express object makes loose coupling
 router.get("/", function(req, res) {
-  res.redirect("/burgers")
+  res.redirect("/burgers");
+});
 
-  db.Burger.findAll({}).then(function(data) {
-    var hbsObject = { burgers: data }
-    res.render("index", hbsObject)
+
+//  separating this bc using > 1 HTTP methods throws an error 
+//  aka cause an error if your REDIRECT and then RENDER in same functon 
+
+router.get("/burgers", function(req, res){
+  db.Burger.findAll({}).then(function(data){
+    var hbsObject = { burgers: data};
+    res.render("index", hbsObject);
   })
-})
 
+});
 
 
 router.post("burgers/create", function(req, res) {
