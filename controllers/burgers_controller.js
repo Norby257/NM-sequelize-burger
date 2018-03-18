@@ -15,11 +15,12 @@ router.get("/", function(req, res) {
 
 router.get("/burgers", function(req, res) {
   // express callback response by calling burger.selectAllBurger
+  db.Burger.findAll({}).then(function(dbBurger) {
+    res.json(dbBurger)
+  })
 })
 
-db.Burger.findAll({}).then(function(dbBurger) {
-  res.json(dbBurger)
-})
+
 
 router.post("burger/create", function(req, res) {
   db.Burger.create({
