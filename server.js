@@ -5,7 +5,7 @@ var path = require("path")
 
 var app = express()
 // Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static(path.join(__dirname, "public")))
+app.use(express.static(path.join(__dirname, "public")));
 // app.use(express.static("public"));
 var db = require("./models")
 
@@ -36,7 +36,6 @@ app.use("/", routes)
 app.use("/update", routes)
 app.use("/create", routes)
 
-// app.use(routes);
 // listen on port 3000 OR what ever port is provided in the env
 var PORT = process.env.PORT || 3000
 
