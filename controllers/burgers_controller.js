@@ -13,23 +13,22 @@ router.get("/", function(req, res) {
 });
 
 
-//  separating this bc using > 1 HTTP methods throws an error 
-//  aka cause an error if your REDIRECT and then RENDER in same functon 
+router.get("/burgers", function(req, res) {
+  db.Burger.findAll()
+  .then(function(dbBurger){
+    console.log(dbBurger);
 
-router.get("/burgers", function(req, res){
-  db.Burger.findAll({}).then(function(data){
-    var hbsObject = { burgers: data};
-    res.render("index", hbsObject);
-  })
-
+    var hbsObject = { burger: dbBurger};
+    return res.render("index", hbsObject);
+  });
 });
 
 
 router.post("/burgers/create", function(req,res){
   db.Burger.create({
-    "burger_name": req.body.burger_name
-  }).then(function(result){
-    console.log(result);
+    burger_name: req.body.burger_name
+  }).then(function(dbBurger){
+    console.log(dbBurger);
     res.redirect("/");
   });
 });
@@ -45,10 +44,9 @@ router.put("/burgers/update/:id", function(req, res) {
         id: req.params.id
       }
     }
-  ).then(function(result) {
+  ).then(function(dbBurger) {
     // wrapper for orm.js that using MySQL update callback will return a log to console,
     // render back to index with handle
-    console.log(result)
     // Send back response and let page reload from .done in Ajax
     res.json("/")
   })
