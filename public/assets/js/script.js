@@ -1,24 +1,14 @@
-console.log("We are linked")
-
 $(document).ready(function() {
-  //  on click events for #text-enter button aka submit
-  $("#text-enter").on("click", function(e) {
-    e.preventDefault()
-    var newBurger = {
-      burger_name: $("#enter_text").val()
-    }
-    console.log(newBurger.burger_name)
-  })
+  $(".devour-form").on("submit", function(event){
+    event.preventDefault();
 
-  $("#devour-btn").on("click", function() {
-    updateDevoured()
-  })
-//  pseudo code for updating devoured status 
-  function updateDevoured(Burger) {
+    var burger_id = $(this).children(".burger_id").val();
+    //  start ajax
     $.ajax({
-      method: "UPDATE",
-      url: "/burgers/update/:id " + id,
-      data: Burger
+      method: "PUT",
+      url: "/burgers/update/" + burger_id
+    }).then(function(data){
+      location.reload();
     })
-  }
+  })
 })
